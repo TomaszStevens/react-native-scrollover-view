@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
@@ -19,6 +19,8 @@ const ScrolloverView = ({
   statusBarBackgroundColor,
   footerBackgroundColor,
 }) => {
+  const [hasLaidOut, setHasLaidOut] = useState(false);
+
   const SCREEN_HEIGHT = useSharedValue(Dimensions.get("window").height);
   const STATUS_BAR_HEIGHT = useSharedValue(getStatusBarHeight());
 
@@ -27,6 +29,7 @@ const ScrolloverView = ({
 
   const onLayoutTopContent = (e) => {
     TOP_CONTENT_HEIGHT.value = e.nativeEvent.layout.height;
+    setHasLaidOut(true); // Required to force rerender of hidden content to correct position
   };
   const onLayoutBottomContent = (e) => {
     BOTTOM_CONTENT_HEIGHT.value = e.nativeEvent.layout.height;
@@ -131,7 +134,7 @@ const ScrolloverView = ({
 
   return (
     <View style={{ ...styles.container, backgroundColor }}>
-      <HiddenTopContent />
+      {hasLaidOut && <HiddenTopContent />}
       <Animated.ScrollView
         ref={scrollView}
         onScroll={scrollHandler}

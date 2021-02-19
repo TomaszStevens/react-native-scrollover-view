@@ -1,0 +1,38 @@
+{
+  "name": "react-native-scrollover-view",
+  "version": "1.0.0",
+  "description": "A react-native component that will allow you to quickly implement scroll-over functionality to give the pages on your app a nice layered feel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomaszStevens/react-native-scrollover-view.git"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-reanimated": ">=2.0.0-rc.0"
+  },
+  "keywords": [
+    "scrollover",
+    "pullover",
+    "popover",
+    "scrollover-view",
+    "pullover-view",
+    "react",
+    "react-native",
+    "view",
+    "dynamic",
+    "hidden",
+    "footer"
+  ],
+  "author": "Tomasz Stevens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomaszStevens/react-native-scrollover-view/issues"
+  },
+  "homepage": "https://github.com/TomaszStevens/react-native-scrollover-view#readme"
+}
