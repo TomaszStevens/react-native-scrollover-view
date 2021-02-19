@@ -10,6 +10,8 @@ This package makes use of react-native-reanimated v2 alpha and was built and tes
 
 ## Example
 
+![](scrollover-view.gif)
+
 ```
 import React from "react";
 import { View, Text } from "react-native";
