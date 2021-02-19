@@ -1,6 +1,6 @@
 {
   "name": "react-native-scrollover-view",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A react-native component that will allow you to quickly implement scroll-over functionality to give the pages on your app a nice layered feel.",
   "main": "index.js",
   "scripts": {
