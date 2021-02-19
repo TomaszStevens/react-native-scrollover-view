@@ -84,7 +84,7 @@ There are no required options, however, not providing _topContent_ or _bottomCon
 
 - _topContent_ - The top content rendered in the scrollover-view. This will be static - i.e. the content that is "scrolled over". Takes any react-native component.
 - _bottomContent_ - The bottom content rendered in the scrollover-view. This will be dynamic - i.e. the content that is itself "scrolled". Takes any react-native component.
-- _footerContent_ - If used, when attempting to scroll beyond the bottom bounds of the scrollview, an animated footer will fade in from "behind" the bottom content. Takes any react-native component. Note: Providing a component with a height around 140 is recommended for best-effect.
+- _footerContent_ - If used, when attempting to scroll beyond the bottom bounds of the scrollview, an animated footer will fade in from "behind" the bottom content. Takes any react-native component. Note: Providing a component with a height ~140 is recommended for best-effect.
 - _hiddenTopContent_ - Hidden content that can be revealed by attempting to scroll beyond the upper bounds of the scrollview. Takes any react-native component.
 - _backgroundColor_ - When used, will fill all empty white-space with the color provided. Takes any valid JavaScript color. Note: Specific parts of the background can be overridden with _statusBarBackgroundColor_ and _footerBackgroundColor_.
 - _statusBarBackgroundColor_ - The colour of the status bar. Takes any valid JavaScript color.
