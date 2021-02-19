@@ -53,13 +53,13 @@ const App = () => {
         justifyContent: "center",
       }}
     >
-      <Text style={{ color: "white" }}>Some funky footer content...</Text>
+      <Text style={{ color: "white" }}>Some funky footer content... 🔥</Text>
     </View>
   );
 
   const Hidden = () => (
     <View style={{ padding: 30, width: "100%" }}>
-      <Text style={{ textAlign: "center" }}>Something hidden...</Text>
+      <Text style={{ textAlign: "center" }}>Something hidden... 😲</Text>
     </View>
   );
 
