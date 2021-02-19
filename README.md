@@ -2,7 +2,7 @@
 
 A react-native component that will allow you to quickly implement scroll-over functionality to give the pages on your app a nice layered feel.
 
-The package makes use of react-native-reanimated v2 alpha and was built and tested using version 2.0.0-rc.0. Installation of this package requires some extra steps that can be found here - https://docs.swmansion.com/react-native-reanimated/docs/installation. An attempt to use this package without upgrading to Reanimated 2 will fail.
+This package makes use of react-native-reanimated v2 alpha and was built and tested using version 2.0.0-rc.0. Installation of this package requires some extra steps that can be found here - https://docs.swmansion.com/react-native-reanimated/docs/installation. An attempt to use this package without upgrading to Reanimated 2 will result in a crash.
 
 # Installation
 
