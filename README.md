@@ -89,3 +89,4 @@ There are no required options, however, not providing _topContent_ or _bottomCon
 - _backgroundColor_ - When used, will fill all empty white-space with the color provided. Takes any valid JavaScript color. Note: Specific parts of the background can be overridden with _statusBarBackgroundColor_ and _footerBackgroundColor_.
 - _statusBarBackgroundColor_ - The colour of the status bar. Takes any valid JavaScript color.
 - _footerBackgroundColor_ - The colour of the footer background. Takes any valid JavaScript color.
+- _safeAreaForced_ - Will move the top content below the status bar height. Boolean. Note: Setting to `true` will render _statusBarBackgroundColor_ futile as the content will start at the very top of the screen.

@@ -18,17 +18,20 @@ const ScrolloverView = ({
   backgroundColor,
   statusBarBackgroundColor,
   footerBackgroundColor,
+  safeAreaForced,
 }) => {
   const [hasLaidOut, setHasLaidOut] = useState(false);
 
   const SCREEN_HEIGHT = useSharedValue(Dimensions.get("window").height);
   const STATUS_BAR_HEIGHT = useSharedValue(getStatusBarHeight());
 
-  const TOP_CONTENT_HEIGHT = useSharedValue(0);
+  const [TOP_BLOCK_HEIGHT, SET_TOP_BLOCK_HEIGHT] = useState(0);
+  const SHARED_TOP_BLOCK_HEIGHT = useSharedValue(0);
   const BOTTOM_CONTENT_HEIGHT = useSharedValue(0);
 
-  const onLayoutTopContent = (e) => {
-    TOP_CONTENT_HEIGHT.value = e.nativeEvent.layout.height;
+  const onLayoutTopBlockContent = (e) => {
+    SHARED_TOP_BLOCK_HEIGHT.value = e.nativeEvent.layout.height;
+    SET_TOP_BLOCK_HEIGHT(e.nativeEvent.layout.height);
     setHasLaidOut(true); // Required to force rerender of hidden content to correct position
   };
   const onLayoutBottomContent = (e) => {
@@ -42,11 +45,48 @@ const ScrolloverView = ({
     translationY.value = e.contentOffset.y;
   });
 
-  const topContentStyle = useAnimatedStyle(() => {
+  const topBlockStyle = useAnimatedStyle(() => {
     return {
+      opacity: interpolate(
+        translationY.value,
+        [0, SHARED_TOP_BLOCK_HEIGHT.value],
+        [1, 0.5],
+        Extrapolate.CLAMP
+      ),
       transform: [
         {
-          translateY: translationY.value,
+          translateY:
+            translationY.value +
+            interpolate(translationY.value, [0, -200], [0, 10]),
+        },
+        {
+          scale: interpolate(
+            translationY.value,
+            [0, -200],
+            [1, 1.2],
+            Extrapolate.CLAMP
+          ),
+        },
+      ],
+    };
+  });
+
+  const hiddenContentStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        translationY.value,
+        [0, -200],
+        [0.2, 1.2],
+        Extrapolate.CLAMP
+      ),
+      transform: [
+        {
+          translateY: interpolate(
+            translationY.value,
+            [0, -200],
+            [0, 25],
+            Extrapolate.CLAMP
+          ),
         },
       ],
     };
@@ -55,9 +95,7 @@ const ScrolloverView = ({
   const footerStyle = useAnimatedStyle(() => {
     let DISTANCE_TO_BOTTOM =
       BOTTOM_CONTENT_HEIGHT.value -
-      (SCREEN_HEIGHT.value -
-        TOP_CONTENT_HEIGHT.value -
-        STATUS_BAR_HEIGHT.value);
+      (SCREEN_HEIGHT.value - SHARED_TOP_BLOCK_HEIGHT.value);
 
     return {
       top: 50,
@@ -106,31 +144,39 @@ const ScrolloverView = ({
 
   const Content = () => (
     <>
-      {topContent && (
-        <Animated.View style={topContentStyle} onLayout={onLayoutTopContent}>
-          {topContent()}
-        </Animated.View>
-      )}
+      <Animated.View style={topBlockStyle} onLayout={onLayoutTopBlockContent}>
+        {typeof safeAreaForced !== "undefined" ? (
+          safeAreaForced && <StatusBar />
+        ) : (
+          <StatusBar />
+        )}
+        {topContent && topContent()}
+      </Animated.View>
       {bottomContent && (
         <View onLayout={onLayoutBottomContent}>{bottomContent()}</View>
       )}
     </>
   );
 
-  const HiddenTopContent = () => (
-    <>
-      {hiddenTopContent && (
-        <View
-          style={{
-            ...styles.hiddenTopContent,
-            top: STATUS_BAR_HEIGHT.value + TOP_CONTENT_HEIGHT.value,
-          }}
-        >
-          {hiddenTopContent()}
-        </View>
-      )}
-    </>
-  );
+  const HiddenTopContent = () => {
+    return (
+      <>
+        {hiddenTopContent && (
+          <Animated.View
+            style={[
+              {
+                ...styles.hiddenTopContent,
+                top: TOP_BLOCK_HEIGHT,
+              },
+              hiddenContentStyle,
+            ]}
+          >
+            {hiddenTopContent()}
+          </Animated.View>
+        )}
+      </>
+    );
+  };
 
   return (
     <View style={{ ...styles.container, backgroundColor }}>
@@ -141,7 +187,6 @@ const ScrolloverView = ({
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
       >
-        <StatusBar />
         <Footer />
         <Content />
       </Animated.ScrollView>
