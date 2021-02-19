@@ -67,10 +67,10 @@ const App = () => {
     <ScrolloverView
       topContent={Top}
       bottomContent={Bottom}
-      backgroundColor={"#99bab1"}
-      footerBackgroundColor={"black"}
       footerContent={Footer}
       hiddenTopContent={Hidden}
+      backgroundColor={"#99bab1"}
+      footerBackgroundColor={"black"}
     />
   );
 };
