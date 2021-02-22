@@ -129,6 +129,12 @@ const ScrolloverView = ({
 
   const Footer = () => (
     <>
+      <View
+        style={{
+          ...styles.footer,
+          backgroundColor: footerBackgroundColor ?? backgroundColor,
+        }}
+      />
       {footerContent && (
         <View
           style={{
